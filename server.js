@@ -6,7 +6,7 @@ const cors = require('cors')
 const shortId = require('shortid')
 //mongoose
 const mongoose = require('mongoose')
-mongoose.connect(process.env.MLAB_URI || 'mongodb://localhost/exercise-track' )
+mongoose.connect(process.env.DB_URI || 'mongodb://url-shortener-zegim.mongodb.net/test?')
 const Schema = mongoose.Schema
 
 //Middleware
@@ -99,7 +99,7 @@ app.post('/api/exercise/new-user',(req,res) => {
   createPerson(req.body.username, (err,saveData)=>{
     if(err){
       res.send({error:"Error, Please try again"});
-    }else if (saveData = 'taken'){
+    }else if (saveData === 'taken'){
       res.send({"error":"Username already taken"})
     }else{
       res.send({"username":saveData.username,"id":saveData.shortId});
